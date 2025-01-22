@@ -7,13 +7,16 @@ export default class MoodWidget {
     this.playingIndex = 0;
     this.init(this.data);
   }
+
   setPlayingIndex(index) {
     this.playingIndex = index;
   }
+
   setVolume(volume) {
     this.volume = Number(volume) / 100;
     this.audios.forEach(audio => (audio.volume = Number(volume) / 100));
   }
+
   init(data) {
     this.bgElement = document.createElement('div');
     this.bgElement.id = 'bg';
@@ -29,20 +32,24 @@ export default class MoodWidget {
     this.volumeElement.value = `${this.volume}`;
     this.volumeElement.id = 'moodVolume';
     this.volumeElement.oninput = ({ target }) => this.setVolume(target.value);
+
     data.moods.forEach((mood, index) => {
       const moodBlock = document.createElement('div');
       moodBlock.classList.add('moodItem');
       moodBlock.dataset.index = `${index}`;
       moodBlock.style.backgroundImage = `url("${mood.image}")`;
+
       const icon = document.createElement('img');
       this.icons.push(icon);
       icon.src = mood.icon;
       icon.classList.add('icon');
+
       const audio = document.createElement('audio');
       this.audios.push(audio);
       audio.src = mood.sound;
       audio.classList.add('moodSound');
       audio.dataset.index = `${index}`;
+
       moodBlock.onclick = () => {
         this.audios[index].onpause = () => {
           this.icons[index].src = mood.icon;
@@ -65,15 +72,18 @@ export default class MoodWidget {
           this.setPlayingIndex(index);
         }
       };
+
       moodBlock.append(icon);
       moodBlock.append(audio);
       this.moodsWrapperElement.append(moodBlock);
     });
+
     this.setVolume(`${this.volume}`);
     this.appElement.append(this.moodsWrapperElement);
     this.appElement.append(this.volumeElement);
     this.bgElement.style.backgroundImage = `url("${data.moods[0].image}")`;
   }
+
   render() {
     document.body.append(this.bgElement, this.captionElement, this.appElement);
   }
