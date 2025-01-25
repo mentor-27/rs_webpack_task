@@ -1,7 +1,9 @@
 import MoodWidget from './moodWidget';
 import { icons, sounds, backgrounds } from './assets/index';
+import { IDataSet } from './types/index';
 import './style.scss';
-const data = {
+
+const data: IDataSet = {
   moods: [
     {
       image: backgrounds.bgSummer,
@@ -26,4 +28,5 @@ const data = {
   ],
   pauseIcon: icons.icoPause,
 };
+
 new MoodWidget(data).render();
