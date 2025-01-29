@@ -9,5 +9,5 @@ module.exports = merge(commonConfig, {
     hot: true,
     open: true,
   },
-  plugins: [new ESLintPlugin({ extensions: ['js'], fix: true })],
+  plugins: [new ESLintPlugin({ extensions: ['js', 'ts'], fix: true })],
 });
