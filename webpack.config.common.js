@@ -5,7 +5,7 @@ const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   context: path.resolve(__dirname, 'src'),
-  entry: './index.js',
+  entry: './index.ts',
   output: {
     filename: '[name].[contenthash].js',
     path: path.resolve(__dirname, 'dist'),
@@ -27,6 +27,11 @@ module.exports = {
   ],
   module: {
     rules: [
+      {
+        test: /\.ts$/i,
+        use: 'ts-loader',
+        exclude: /node_modules/,
+      },
       {
         test: /\.css$/i,
         use: [MiniCssExtractPlugin.loader, 'css-loader'],
